@@ -5,12 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.database.sqlite.*;
 import android.util.Log;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.lab9_10.Database.DataBaseHelper;
 import com.example.lab9_10.Entity.Curso;
 import com.example.lab9_10.Entity.Estudiante;
 
 public class MainActivity extends AppCompatActivity {
+        private ImageButton login;
+        private EditText id;
+        EditText password;
+        TextView register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
