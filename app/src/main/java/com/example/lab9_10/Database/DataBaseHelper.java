@@ -225,4 +225,32 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         // return new ArrayList<>();
     }
 
+    public List<Curso> getAllCursos() throws Exception{
+       List<Curso> result= new ArrayList<>();
+        Cursor cursor = null;
+        SQLiteDatabase db=null;
+
+        try{
+            String query="SELECT * FROM CURSO";
+            db= this.getWritableDatabase();
+            cursor = db.rawQuery(query, null);
+            while(cursor.moveToNext()){
+                Curso curso= new Curso(cursor.getString(0),cursor.getString(1),cursor.getInt(2));
+                result.add(curso);
+            }
+
+            return result;
+        }
+        catch (Exception e){
+            throw e;
+        }
+        finally {
+            if(cursor != null)
+                cursor.close();
+            if(db != null)
+                db.close();
+        }
+
+    }
+
 }
