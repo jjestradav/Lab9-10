@@ -1,6 +1,8 @@
 package com.example.lab9_10.Entity;
 
-public class Curso {
+import java.io.Serializable;
+
+public class Curso implements Serializable {
 
     private  String id;
     private  String Descripcion;
@@ -37,5 +39,10 @@ public class Curso {
 
     public void setCreditos(int creditos) {
         this.creditos = creditos;
+    }
+
+    @Override
+    public String toString(){
+        return this.Descripcion;
     }
 }

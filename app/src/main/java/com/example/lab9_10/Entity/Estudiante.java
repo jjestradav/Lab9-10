@@ -1,9 +1,10 @@
 package com.example.lab9_10.Entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Estudiante {
+public class Estudiante implements Serializable {
 
     private String id;
     private String nombre;

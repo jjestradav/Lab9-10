@@ -5,52 +5,83 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MatricularActivity"
+    android:background="@drawable/gradient"
     android:orientation="vertical">
 
-    <LinearLayout
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+<androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_matricula"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+
+
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Estudiante"
+        android:textSize="30sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10px"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="15dp">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:src="@drawable/id"/>
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_marginTop="9dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/cedulaText"
-            android:text="11"
-            android:textSize="22sp"/>
+            android:text=""
+            android:textSize="15sp"
+            android:textStyle="italic"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginBottom="20dp">
 
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="NOMBRE: "
+            android:text="Nombre: "
 
-            android:textSize="22sp"/>
+            android:textSize="15sp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/nombreText"
-            android:textSize="22sp"/>
+            android:textStyle="italic"
+            android:textSize="15sp"/>
 
 
     </LinearLayout>
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginBottom="20dp">
@@ -58,49 +89,63 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="APELLIDOS: "
+            android:text="Apellidos: "
 
-            android:textSize="22sp"/>
+            android:textSize="15sp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/apellidosText"
-            android:textSize="22sp"/>
+            android:textStyle="italic"
+            android:textSize="15sp"/>
 
 
     </LinearLayout>
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="10dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="64dp"
             android:layout_height="wrap_content"
-            android:text="EDAD: "
+            android:text="Edad: "
 
-            android:textSize="22sp"/>
+            android:textSize="15sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/edadText"
-            android:textSize="22sp"/>
+            android:inputType="number"
+            android:textStyle="italic"
+            android:textSize="15sp"/>
 
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cursos"
+        android:textSize="30sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="0dp"/>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="228dp"
+        android:fillViewport="true"
+        android:id="@+id/scroll_view">
+
         <ListView
-         android:id="@+id/checkeable_list"
-         android:layout_width="match_parent"
+            android:id="@+id/checkeable_list"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
 
@@ -109,6 +154,14 @@
     </ScrollView>
 
 
-
+<ImageView
+    android:id="@+id/matricularBtn"
+    android:layout_marginTop="8dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/save"
+    android:layout_marginLeft="9dp"
+    android:background="#ffffff"
+    android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>

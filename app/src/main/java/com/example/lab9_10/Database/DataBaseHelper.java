@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 
 import com.example.lab9_10.Entity.Curso;
 import com.example.lab9_10.Entity.Estudiante;
+import com.example.lab9_10.Entity.Usuario;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -85,6 +86,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private void createTableUsuario(SQLiteDatabase db){
         String TableUsuario="CREATE TABLE IF NOT EXISTS Usuario(" +
                 "id VARCHAR(10) PRIMARY KEY,"+
+                "password VARCHAR(50),"+
                 "rol VARCHAR(10)"+
                 ");";
         db.execSQL(TableUsuario);
@@ -116,7 +118,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cv.put("id", curso.getId());
         cv.put("descripcion", curso.getDescripcion());
         cv.put("creditos", curso.getCreditos());
-        return db.insert("Curso",null,cv) == -1 ? false : true;
+        return db.insert("Curso",null,cv) > -1;
 
 
 
@@ -129,11 +131,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
         cv.put("estudiante", estudiante);
         cv.put("curso", curso);
-        return db.insert("EstudianteCurso",null,cv) == -1 ? false : true;
+        return db.insert("EstudianteCurso",null,cv) >-1;
 
 
 
 
+    }
+
+    public boolean insertUsuario(Usuario us){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("id", us.getId());
+        cv.put("password", us.getPassword());
+        cv.put("rol", us.getRol());
+        return db.insert("Usuario",null,cv) > -1;
     }
 
 
@@ -181,6 +192,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
        // return new ArrayList<>();
     }
 
+    public Estudiante getSingleEstudiante(String id) throws Exception{
+        SQLiteDatabase db=this.getWritableDatabase();
+        String query="SELECT * FROM Estudiante where id='"+id+"';";
+        Cursor cursor=  db.rawQuery(query,null);
+        while(cursor.moveToNext()){
+            Estudiante es= new Estudiante(cursor.getString(0),cursor.getString(1),cursor.getString(2),
+                    cursor.getInt(3));
+            return es;
+        }
+
+
+        return null;
+    }
     public Estudiante getEstudiante(String id) throws Exception {
 
         // List<Estudiante> result = new ArrayList<>();
@@ -189,7 +213,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         try {
             String queryString = "SELECT Estudiante.id,Estudiante.nombre,Estudiante.apellidos,Estudiante.edad,Curso.id as idCurso,Curso.descripcion,Curso.creditos" +
-                    " FROM Estudiante,Curso,EstudianteCurso WHERE EstudianteCurso.estudiante="+id+ "AND EstudianteCurso.curso=Curso.id;";
+                    " FROM Estudiante,Curso,EstudianteCurso WHERE EstudianteCurso.estudiante='"+id+ "' AND EstudianteCurso.curso=Curso.id" +
+                    " AND Estudiante.id=EstudianteCurso.estudiante;";
             db = this.getWritableDatabase();
             cursor = db.rawQuery(queryString,null);
             Map<String,Estudiante> map= new HashMap<>();
@@ -208,7 +233,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 }
             }
             List<Estudiante> list= new ArrayList<>(map.values());
-            return list.get(0);
+            return list.size() > 0 ? list.get(0) : null;
         }
         catch (Exception e) {
             throw e;
@@ -252,5 +277,51 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
 
     }
+
+    public String login(String id, String password) throws Exception{
+        SQLiteDatabase db=this.getWritableDatabase();
+        String query="SELECT * FROM Usuario where id='"+id+"' "+"AND password='"+password+"';";
+      Cursor cursor=  db.rawQuery(query,null);
+      if(cursor.moveToNext())
+          return cursor.getString(2);
+
+      return null;
+
+    }
+
+    public boolean deleteEstudianteCurso(String estudiante,String curso)throws Exception{
+        SQLiteDatabase db=this.getWritableDatabase();
+        String query="DELETE FROM EstudianteCurso WHERE estudiante='"+estudiante+"' AND curso='"+curso+"';";
+        db.rawQuery(query,null);
+        return true;
+    }
+
+    public boolean updateCurso(Curso curso)throws Exception{
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("descripcion",curso.getDescripcion());
+        cv.put("creditos",curso.getCreditos());
+        return db.update("Curso",cv,"id=?",new String[]{curso.getId()}) > 0;
+
+
+    }
+
+
+    public boolean updateEstudiante(Estudiante es)throws Exception{
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("nombre",es.getNombre());
+        cv.put("apellidos",es.getApellidos());
+        cv.put("edad",es.getEdad());
+        return db.update("Estudiante",cv,"id=?",new String[]{es.getId()}) > 0;
+    }
+    public boolean deleteCurso(Curso curso) throws Exception{
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.delete("EstudianteCurso","curso=?",new String[]{curso.getId()});
+        return db.delete("Curso","id=?",new String[]{curso.getId()}) > 0;
+
+    }
+
+
 
 }

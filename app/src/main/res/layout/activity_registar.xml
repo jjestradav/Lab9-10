@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegistarActivity"
+    android:background="@drawable/gradient"
+    android:layout_gravity="center_horizontal">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/register"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="30dp">
+
+            <TextView
+                android:layout_width="126dp"
+                android:layout_height="wrap_content"
+                android:text="ID"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/registar_id"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="22sp"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="126dp"
+                android:layout_height="wrap_content"
+                android:text="Nombre"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/registrar_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text=""
+                android:textSize="22sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="30dp">
+
+            <TextView
+                android:layout_width="126dp"
+                android:layout_height="wrap_content"
+                android:text="Apellidos"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/registrar_apellidos"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="22sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="30dp">
+
+            <TextView
+                android:layout_width="126dp"
+                android:layout_height="wrap_content"
+                android:text="Edad"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/registrar_edad"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="22sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:layout_width="126dp"
+                android:layout_height="wrap_content"
+                android:text="Contraseña"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/registrar_contraseña"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:inputType="textPassword"
+                android:textSize="22sp"/>
+
+        </LinearLayout>
+
+
+
+
+
+        <ImageView
+            android:id="@+id/registarBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="#ffffff"
+            android:src="@drawable/save" />
+
+
+
+        </LinearLayout>
+
+
+
+
+</RelativeLayout>
