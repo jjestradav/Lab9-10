@@ -63,8 +63,9 @@ public class ListEstudianteActivity extends AppCompatActivity
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
-        if (direction != ItemTouchHelper.START) {
         Estudiante clicked = mAdapter.getSwipedItem(viewHolder.getAdapterPosition());
+        if (direction != ItemTouchHelper.START) {
+
         Intent intent = new Intent(this, MatricularActivity.class);
         intent.putExtra("estudiante", clicked);
         intent.putExtra("admin", true);
@@ -73,6 +74,24 @@ public class ListEstudianteActivity extends AppCompatActivity
         finish();
         mAdapter.notifyDataSetChanged();
           }
+        else{
+            try {
+                if (model.deleteEstudiante(clicked)) {
+                    Toast.makeText(this, "Estudiante Eliminado Correctamente", Toast.LENGTH_LONG).show();
+                    mAdapter.removeItem(position);
+                    mAdapter.notifyDataSetChanged();
+
+                }
+                else
+                    throw  new Exception();
+
+            }
+            catch (Exception e){
+                Toast.makeText(this,"Ocurrio un error al eliminar el estudiante",Toast.LENGTH_LONG).show();
+
+            }
+
+        }
     }
 
 

@@ -322,6 +322,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public boolean deleteEstudianteCursoByEstudiante(Estudiante es) throws Exception{
+        SQLiteDatabase db=this.getWritableDatabase();
+        return db.delete("EstudianteCurso","estudiante=?",new String[]{es.getId()}) > 0 ;
+
+    }
+
+
+    public boolean deleteEstudiante(Estudiante es) throws Exception{
+        SQLiteDatabase db=this.getWritableDatabase();
+       return db.delete("Estudiante","id=?",new String[]{es.getId()}) > 0;
+    }
+
+    public boolean deleteUsuario(Estudiante es) throws Exception{
+        SQLiteDatabase db=this.getWritableDatabase();
+       return db.delete("Usuario","id=?",new String[]{es.getId()}) > 0;
+    }
+
 
 
 }

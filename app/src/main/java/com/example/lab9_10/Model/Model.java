@@ -70,4 +70,8 @@ public class Model {
         return db.deleteCurso(curso);
     }
 
+    public boolean deleteEstudiante(Estudiante es) throws Exception{
+        return db.deleteEstudianteCursoByEstudiante(es) && db.deleteEstudiante(es) && db.deleteUsuario(es);
+    }
+
 }

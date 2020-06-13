@@ -37,7 +37,7 @@ public class EstudiantesAdapter extends RecyclerView.Adapter<EstudiantesAdapter.
             title1 = view.findViewById(R.id.titleFirstLbl);
             title2 = view.findViewById(R.id.titleSecLbl);
             imageView=view.findViewById(R.id.image);
-            imageView.setImageResource(R.drawable.course);
+            imageView.setImageResource(R.drawable.student);
         //    description = view.findViewById(R.id.descriptionLbl);
             viewBackgroundDelete = view.findViewById(R.id.view_background_delete);
             viewBackgroundEdit = view.findViewById(R.id.view_background_edit);
