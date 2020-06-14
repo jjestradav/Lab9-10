@@ -2,8 +2,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:clickable="true"
-    android:orientation="vertical">
+    android:orientation="vertical"
+  >
 
     <LinearLayout
         android:id="@+id/view_background_edit"
@@ -11,7 +13,8 @@
         android:layout_height="match_parent"
         android:background="@color/bg_row_background_edit"
         android:visibility="gone"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:radius="11dp">
 
         <ImageView
             android:id="@+id/edit_icon"
@@ -42,7 +45,8 @@
         android:layout_height="match_parent"
         android:background="@color/bg_row_background_delete"
         android:visibility="gone"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:radius="11dp">
 
         <ImageView
             android:id="@+id/delete_icon"
@@ -72,7 +76,8 @@
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:padding="@dimen/padd_10"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:radius="110dp">
 
         <ImageView
             android:id="@+id/image"
@@ -83,7 +88,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:radius="11dp">
             <TextView
                 android:id="@+id/titleFirstLbl"
                 android:layout_width="wrap_content"

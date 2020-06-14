@@ -148,6 +148,34 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public List<Estudiante> getAllEstudiantesTable() throws Exception{
+        Cursor cursor=null;
+        SQLiteDatabase db=null;
+        try{
+            List<Estudiante> result= new ArrayList<>();
+            db=this.getWritableDatabase();
+            String query="SELECT Estudiante.id,Estudiante.nombre,Estudiante.apellidos,Estudiante.edad FROM Estudiante;";
+            cursor=db.rawQuery(query,null);
+            while(cursor.moveToNext()){
+                Estudiante es= new Estudiante(cursor.getString(0),cursor.getString(1),cursor.getString(2),
+                        cursor.getInt(3));
+                result.add(es);
+            }
+            return result;
+
+        }
+        catch (Exception e){
+            throw e;
+        }
+        finally{
+            if(cursor != null)
+                cursor.close();
+
+            if(db != null)
+                db.close();
+
+        }
+    }
 
     public List<Estudiante> getAllEstudiantes() throws Exception {
 

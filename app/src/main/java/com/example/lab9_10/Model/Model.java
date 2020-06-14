@@ -41,6 +41,10 @@ public class Model {
 
     }
 
+    public List<Estudiante> getAllEstudiantesTable() throws Exception{
+        return db.getAllEstudiantesTable();
+    }
+
     public String login(String username, String password) throws Exception{
         return db.login(username,password);
     }
@@ -71,7 +75,10 @@ public class Model {
     }
 
     public boolean deleteEstudiante(Estudiante es) throws Exception{
-        return db.deleteEstudianteCursoByEstudiante(es) && db.deleteEstudiante(es) && db.deleteUsuario(es);
+        db.deleteEstudianteCursoByEstudiante(es);
+        boolean a =db.deleteEstudiante(es);
+        db.deleteUsuario(es);
+        return a;
     }
 
 }

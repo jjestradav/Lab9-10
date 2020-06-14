@@ -76,6 +76,8 @@ public class NavBarActivity extends AppCompatActivity implements NavigationView.
         else
         if(id==R.id.nav_courses){
             Intent intent = new Intent(this, ListCursoActivity.class);
+            boolean admin=getIntent().getBooleanExtra("admin",false);
+            intent.putExtra("admin",admin);
             startActivity(intent);
            // finish();
         }

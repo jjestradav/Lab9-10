@@ -10,8 +10,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import androidx.appcompat.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.lab9_10.Adapter.CursosAdapter;
@@ -21,6 +24,7 @@ import com.example.lab9_10.Entity.Curso;
 import com.example.lab9_10.Entity.Estudiante;
 import com.example.lab9_10.Helper.RecyclerItemTouchHelper;
 import com.example.lab9_10.Model.Model;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +35,7 @@ public class ListEstudianteActivity extends AppCompatActivity
     private RecyclerView mRecyclerView;
     EstudiantesAdapter mAdapter;
     private List<Estudiante> list=new ArrayList<>();
+    FloatingActionButton fab;
     Model model= new Model(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,15 @@ public class ListEstudianteActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_estudiantes);
         setTitle("Estudiantes");
+        fab=findViewById(R.id.fabAddEstudiante);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(ListEstudianteActivity.this,RegistarActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         mRecyclerView=findViewById(R.id.recycler_estudiantes);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
@@ -52,12 +66,30 @@ public class ListEstudianteActivity extends AppCompatActivity
 
     private void initListaEstudiantes(){
         try {
-            this.list = model.getAllEstudiantes();
+            List<Estudiante> haveMatricula = model.getAllEstudiantes();
+            List<Estudiante> all= model.getAllEstudiantesTable();
+            List<Estudiante> result=new ArrayList<>(haveMatricula);
+            for(Estudiante i: all){
+                if(!contains(haveMatricula,i)){
+                   result.add(i);
+                }
+            }
+            this.list= new ArrayList<>(result);
+
         }
         catch (Exception e){
             Toast.makeText(this,"Error al cargar estudiantes",Toast.LENGTH_LONG).show();
 
         }
+    }
+
+    private boolean contains(List<Estudiante> list, Estudiante es){
+
+        for(Estudiante i: list){
+            if(i.getId().equals(es.getId()))
+                return true;
+        }
+        return false;
     }
 
 
@@ -94,6 +126,27 @@ public class ListEstudianteActivity extends AppCompatActivity
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.menu_search,menu);
+        MenuItem item=menu.findItem(R.id.menu_search);
+        SearchView searchView=(SearchView)item.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+               mAdapter.getFilter().filter(newText);
+               return false;
+            }
+        });
+
+        return true;
+    }
 
     @Override
     public void onItemMove(int source, int target) {

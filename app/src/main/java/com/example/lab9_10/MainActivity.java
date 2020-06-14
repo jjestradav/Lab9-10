@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             String rol= this.model.login(username,password);
             if(rol != null){
                 if(rol.equals("estudiante")){
-                 boolean isNew=getIntent().getBooleanExtra("register",false);
+                // boolean isNew=getIntent().getBooleanExtra("register",false);
 
 
                      Intent intent = new Intent(this, MatricularActivity.class);
@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else{
                     Intent intent= new Intent(this,NavBarActivity.class);
+                    intent.putExtra("admin",true);
                     startActivity(intent);
                     finish();
                 }

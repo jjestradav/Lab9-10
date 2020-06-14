@@ -64,13 +64,19 @@ public class RegistarActivity extends AppCompatActivity {
                 Usuario us = new Usuario(this.id.getText().toString(), this.password.getText().toString(), "estudiante");
                 Estudiante es = new Estudiante(us.getId(), this.nombre.getText().toString(), this.apellidos.getText().toString(),
                         Integer.parseInt(this.edad.getText().toString()));
-                model.insertUsuario(us);
-                model.insertEstudiante(es);
-                Toast.makeText(this,"Estudiante Registrado",Toast.LENGTH_LONG).show();
-                Intent intent= new Intent(this,MainActivity.class);
-                intent.putExtra("register",true);
-                startActivity(intent);
-                finish();
+
+                if(model.getEstudiante(es.getId())==null) {
+                   boolean a= model.insertUsuario(us);
+                   boolean b= model.insertEstudiante(es);
+                    Toast.makeText(this, "Estudiante Registrado", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(this,ListEstudianteActivity.class);
+                    intent.putExtra("register", true);
+                    startActivity(intent);
+                    finish();
+                }
+                else{
+                    Toast.makeText(this,"Error! Estudiante ya existe",Toast.LENGTH_LONG).show();
+                }
             }
             catch (Exception e){
                 Toast.makeText(this,"Ha ocurrido un error",Toast.LENGTH_LONG).show();

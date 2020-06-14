@@ -57,7 +57,7 @@ public class CursosAdapter extends RecyclerView.Adapter<CursosAdapter.MyViewHold
         this.carreraList = carreraList;
         this.listener = listener;
         //init filter
-        this.carreraListFiltered = carreraList;
+        this.carreraListFiltered = new ArrayList<>(carreraList);
     }
 
     @Override
@@ -148,12 +148,12 @@ public class CursosAdapter extends RecyclerView.Adapter<CursosAdapter.MyViewHold
             protected FilterResults performFiltering(CharSequence charSequence) {
                 String charString = charSequence.toString();
                 if (charString.isEmpty()) {
-                    carreraListFiltered = carreraList;
+                    carreraListFiltered = new ArrayList<>(carreraList);
                 } else {
                     List<Curso> filteredList = new ArrayList<>();
                     for (Curso row : carreraList) {
                         // filter use two parameters
-                        if (row.getId().contains(charString.toLowerCase()) || row.getDescripcion().toLowerCase().contains(charString.toLowerCase())) {
+                        if (row.getDescripcion().toLowerCase().contains(charString.toLowerCase()) || row.getId().contains(charString.toLowerCase())) {
                             filteredList.add(row);
                         }
                     }

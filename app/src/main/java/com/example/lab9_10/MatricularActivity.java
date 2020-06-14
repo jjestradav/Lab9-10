@@ -88,9 +88,21 @@ public class MatricularActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    actualizarEstudiante();
-                    actualizarMatricula();
-                    Toast.makeText(MatricularActivity.this,"Informacion actualizada correctamente",Toast.LENGTH_LONG).show();
+
+
+                    if(!admin) {
+                        actualizarMatricula();
+                        Toast.makeText(MatricularActivity.this,"Informacion actualizada correctamente",Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        actualizarEstudiante();
+                        Toast.makeText(MatricularActivity.this,"Informacion actualizada correctamente",Toast.LENGTH_LONG).show();
+                        Intent intent= new Intent(MatricularActivity.this,ListEstudianteActivity.class);
+                        intent.putExtra("admin",admin);
+                        startActivity(intent);
+                        finish();
+                    }
+
                 }
                 catch (Exception e) {
                     Toast.makeText(MatricularActivity.this,"Ocurrio un error al actualizar la informacion",Toast.LENGTH_LONG).show();
@@ -159,15 +171,17 @@ public class MatricularActivity extends AppCompatActivity {
             this.nombre.setText(estudiante.getNombre());
             this.apellidos.setText(estudiante.getApellidos());
             this.edad.setText("" + estudiante.getEdad());
+            if(!admin) {
+                this.nombre.setFocusable(false);
+                this.apellidos.setFocusable(false);
+                this.edad.setFocusable(false);
+            }
             setSelectedItems(this.adapter, estudiante.getCursos());
             this.selectedItems = estudiante.getCursos();
             this.oldList = new ArrayList<>(estudiante.getCursos());
             if(admin){
                 toolbar.setTitle("Ver Estudiante");
-                this.nombre.setFocusable(false);
-                this.apellidos.setFocusable(false);
-                this.edad.setFocusable(false);
-                this.button.setVisibility(View.GONE);
+                //this.button.setVisibility(View.GONE);
                // this.lv.setEnabled(false);
                 View v = getLayoutInflater().inflate(R.layout.matricular_row, null);
                 CheckedTextView txt=findViewById(R.id.txt_lan);
