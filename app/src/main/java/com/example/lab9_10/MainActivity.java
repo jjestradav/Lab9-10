@@ -40,41 +40,18 @@ public class MainActivity extends AppCompatActivity {
                 login();
             }
         });
-        register=findViewById(R.id.registar_text);
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(getApplicationContext(), RegistarActivity.class);
-                startActivity(intent);
-
-
-            }
-        });
-
-
-//        Estudiante es= new Estudiante("117370720","Jonathan","Estrada",21);
-//       Usuario usuario= new Usuario("root","root","admin");
-//        Curso curso= new Curso("1","Matematicas",4);
-//        Curso curso2= new Curso("2","Fundamentos de Informatica",4);
-//        Curso curso3= new Curso("3","Programacion I",4);
-//        Curso curso4= new Curso("4","Programacion II",4);
-//        Curso curso5= new Curso("5","Programacion III",4);
-//        Curso curso6= new Curso("6","Programacion IV",4);
-//        Curso curso7= new Curso("7","Paradigmas de programacion",4);
-//        Curso curso8= new Curso("8","Estructuras de Datos",4);
-//        Curso curso9= new Curso("9","Estructuras Discretas",4);
-//        Curso curso10= new Curso("10","Bases de Datos",4);
-//        es.getCursos().add(curso);
-//       try {
-//        db.insertUsuario(usuario);
+//        register=findViewById(R.id.registar_text);
+//        register.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent= new Intent(getApplicationContext(), RegistarActivity.class);
+//                startActivity(intent);
 //
-//       }
-//       catch (Exception e){
-//           Log.e("ERRORRR, ",e.getMessage());
-//       }
 //
-//        //Intent intent= new Intent(this,MatricularActivity.class);
-//        //startActivity(intent);
+//            }
+//        });
+
+
     }
 
 

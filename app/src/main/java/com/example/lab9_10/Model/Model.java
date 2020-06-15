@@ -81,4 +81,8 @@ public class Model {
         return a;
     }
 
+    public boolean isMatriculado(Curso cur) throws Exception{
+        return db.isMatriculado(cur.getId());
+    }
+
 }

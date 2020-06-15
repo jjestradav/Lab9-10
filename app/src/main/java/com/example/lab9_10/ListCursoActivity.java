@@ -94,12 +94,18 @@ public class ListCursoActivity extends AppCompatActivity
                     // save the index deleted
                     final int deletedIndex = viewHolder.getAdapterPosition();
                     // remove the item from recyclerView
-                    mAdapter.removeItem(viewHolder.getAdapterPosition());
-                    if (model.deleteCurso(clicked)) {
-                        Toast.makeText(ListCursoActivity.this,"Curso eliminado con Exito",Toast.LENGTH_LONG).show();
+
+
+                    if(!model.isMatriculado(clicked)) {
+                        if (model.deleteCurso(clicked)) {
+                            mAdapter.removeItem(viewHolder.getAdapterPosition());
+                            Toast.makeText(ListCursoActivity.this, "Curso eliminado con Exito", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(ListCursoActivity.this, "Ocurrio un error al eliminar el curso", Toast.LENGTH_LONG).show();
+                        }
                     }
                     else{
-                        Toast.makeText(ListCursoActivity.this,"Ocurrio un error al eliminar el curso",Toast.LENGTH_LONG).show();
+                        Toast.makeText(ListCursoActivity.this, "Error! Curso ya está matriculado por uno más estudiantes", Toast.LENGTH_LONG).show();
                     }
                 }
                 catch (Exception e){

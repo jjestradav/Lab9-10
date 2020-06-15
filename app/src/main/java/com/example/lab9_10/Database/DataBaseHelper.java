@@ -233,6 +233,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         return null;
     }
+
+
+    public boolean isMatriculado(String curso) throws Exception{
+        SQLiteDatabase db=this.getWritableDatabase();
+        String query="SELECT * FROM EstudianteCurso where curso='"+curso+"';";
+        Cursor cursor=db.rawQuery(query,null);
+        return cursor.moveToNext();
+    }
+
+
     public Estudiante getEstudiante(String id) throws Exception {
 
         // List<Estudiante> result = new ArrayList<>();
@@ -345,7 +355,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
     public boolean deleteCurso(Curso curso) throws Exception{
         SQLiteDatabase db=this.getWritableDatabase();
-        db.delete("EstudianteCurso","curso=?",new String[]{curso.getId()});
+       // db.delete("EstudianteCurso","curso=?",new String[]{curso.getId()});
         return db.delete("Curso","id=?",new String[]{curso.getId()}) > 0;
 
     }

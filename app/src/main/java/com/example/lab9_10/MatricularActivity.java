@@ -176,25 +176,25 @@ public class MatricularActivity extends AppCompatActivity {
                 this.apellidos.setFocusable(false);
                 this.edad.setFocusable(false);
             }
-            setSelectedItems(this.adapter, estudiante.getCursos());
-            this.selectedItems = estudiante.getCursos();
-            this.oldList = new ArrayList<>(estudiante.getCursos());
+
             if(admin){
                 toolbar.setTitle("Ver Estudiante");
                 //this.button.setVisibility(View.GONE);
                // this.lv.setEnabled(false);
-                View v = getLayoutInflater().inflate(R.layout.matricular_row, null);
-                CheckedTextView txt=findViewById(R.id.txt_lan);
-                for(int i=0; i<array.length; i++){
-                    adapter.getView(i,txt,(ViewGroup) v.getParent() ).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-                        }
-                    });
-                }
+                Curso[] aux=new Curso[estudiante.getCursos().size()];
+                adapter = new ArrayAdapter<Curso>(this, R.layout.matricular_row, R.id.txt_lan, cursos.toArray(array)){
+                    @Override
+                    public boolean isEnabled(int position) {
+                        return false;
+                    }
+                };
+                //lv.setEnabled(false);
+                lv.setAdapter(adapter);
 
             }
+            setSelectedItems(this.adapter, estudiante.getCursos());
+            this.selectedItems = estudiante.getCursos();
+            this.oldList = new ArrayList<>(estudiante.getCursos());
 
         }
 
